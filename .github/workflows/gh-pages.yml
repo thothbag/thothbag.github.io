@@ -1,0 +1,62 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Publish MkDocs
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches:
+    - main
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Setups Python 3.8
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      # Upgrades Pip
+      - name: Upgrade pip
+        run: |
+          # install pip=>20.1 to use "pip cache dir"
+          python3 -m pip install --upgrade pip
+
+      # Installs MkDocs and Material Theme
+      - name: Install MkDocs
+        run: python3 -m pip install mkdocs mkdocs-material
+
+      # Build MkDocs
+      - name: Build MkDocs
+        run: mkdocs build
+
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      # Publish GitHub Pages
+      - uses: actions/deploy-pages@v1
+        id: deployment

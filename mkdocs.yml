@@ -1,0 +1,10 @@
+site_name: Memoizer
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: orange
+
+markdown_extensions:
+- admonition
