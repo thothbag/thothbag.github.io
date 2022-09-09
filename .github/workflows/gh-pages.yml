@@ -32,13 +32,20 @@ jobs:
           # install pip=>20.1 to use "pip cache dir"
           python3 -m pip install --upgrade pip
 
-      # Installs MkDocs and Material Theme
-      - name: Install MkDocs
-        run: python3 -m pip install mkdocs mkdocs-material
+      # Install pipenv
+      - name: Install pipenv
+        run: |
+          python3 -m pip install pipenv
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python3 -m pipenv sync
 
       # Build MkDocs
       - name: Build MkDocs
-        run: mkdocs build
+        run: |
+          python3 -m pipenv run mkdocs build
 
       - uses: actions/upload-pages-artifact@v1
         with:
