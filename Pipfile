@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = "false"
+name = "pypi"
+
+[packages]
+mkdocs = "*"
+mkdocs-material = "*"
+mkdocs-blogging-plugin = "*"
+pygments = "*"
+plantuml-markdown = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
+

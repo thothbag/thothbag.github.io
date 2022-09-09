@@ -1,10 +1,118 @@
 site_name: Memoizer
+site_url: https://thothbag.github.io/
+
+repo_name: thothbag
+repo_url: https://github.com/thothbag/thothbag.github.io/
+
+use_directory_urls: false
+
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
 
 theme:
   name: material
+  language: ja
   palette:
     primary: indigo
     accent: orange
+  include_search_page: false
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.sections
+    - navigation.tracking
+
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+
+    - search.highlight
+    - search.suggest
+    - search.share
+
+    - toc.follow
+
+  icon:
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+
+plugins:
+  - tags
+  - search:
+      lang:
+        - en
+        - ja
+      separator: '[\s\-,:!=\[\]()"/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - blogging:
+      dirs:
+        - blogs/articles
+      features:
+        tags:
+          index_page: tags.md
+          insert: bottom
+      paging: true
+      theme:
+        name: card
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      slugify: !!python/name:pymdownx.slugs.uslugify
+
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.keys
+  - pymdownx.betterem:
+      smart_enable: all
+
+  - pymdownx.highlight:
+      use_pygments: true
+      auto_title: true
+      linenums: true
+      anchor_linenums: true
+
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  - plantuml_markdown:
+      server: http://www.plantuml.com/plantuml
+
 
 markdown_extensions:
 - admonition
